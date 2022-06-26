@@ -1,0 +1,43 @@
+/****************************************************************
+    Following is the class structure of the Node class:
+    class Node
+    {
+    public:
+        int data;
+        Node *next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+*****************************************************************/
+
+Node *removeDuplicates(Node *head)
+{
+    // Write your code here
+    int length = 2e5 + 2;
+    bool exist[length];
+    for(int i=0; i<length; i++){
+        exist[i] = false;
+    }
+
+    Node* curr = head;
+    Node* prev = NULL;
+
+    while(curr != NULL){
+        if(exist[curr->data] == true){
+           prev->next = curr->next;
+           Node *nodeToDelete = curr;
+           curr = curr->next;
+            delete nodeToDelete;
+        }else{
+            exist[curr->data] = true;
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+
+    return head;
+
+}
