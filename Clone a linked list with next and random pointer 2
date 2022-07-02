@@ -1,0 +1,84 @@
+class Solution
+{
+    private:
+    void insertAtTail(Node* &head, Node* &tail, int data){
+        Node* temp = new Node(data);
+        if(tail == NULL){
+            tail = temp;
+            head = temp;
+        }else{
+            tail->next = temp;
+            tail = temp;
+        }
+    }
+    public:
+    Node *copyList(Node *head)
+    {
+        //Write your code here
+
+        Node* cloneHead = NULL;
+        Node* cloneTail = cloneHead;
+
+
+        Node* temp = head;
+
+        while(temp != NULL){
+            insertAtTail(cloneHead, cloneTail, temp->data);
+            temp = temp->next;
+        }
+
+
+        Node* clone = cloneHead;
+        Node* original = head;
+        Node* next = NULL;
+
+        while(clone != NULL){
+            next = original->next;
+            original->next = clone;
+            original = next;
+
+            next = clone->next;
+            clone->next = original;
+            clone = next;
+        }
+
+        clone = cloneHead;
+        original = head;
+
+        while(original != NULL){
+            if(original->next != NULL){
+                if(original->arb != NULL){
+                   original -> next -> arb = original -> arb -> next;
+                }else{
+                    original -> next -> arb = original -> arb;
+                }
+                original = original->next->next;
+
+            }else{
+             original = original->next;
+            }
+
+        }
+
+        clone = cloneHead;
+        original = head;
+
+        while(original != NULL){
+
+            original->next = original->next->next;
+            original = original->next;
+
+            if(original != NULL){
+               clone->next = original->next;
+            }
+
+            clone = clone->next;
+
+        }
+
+
+
+        return cloneHead;
+    }
+
+};

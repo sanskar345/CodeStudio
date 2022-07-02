@@ -1,0 +1,46 @@
+class Solution
+{
+    private:
+    void insertAtTail(Node* &head, Node* &tail, int data){
+        Node* temp = new Node(data);
+        if(tail == NULL){
+            tail = temp;
+            head = temp;
+        }else{
+            tail->next = temp;
+            tail = temp;
+        }
+    }
+    public:
+    Node *copyList(Node *head)
+    {
+        //Write your code here
+
+        Node* newHead = NULL;
+        Node* newTail = newHead;
+
+        map<Node*, Node*> mapping;
+
+        Node* temp = head;
+
+        while(temp != NULL){
+            insertAtTail(newHead, newTail, temp->data);
+            mapping[temp] = newTail;
+            temp = temp->next;
+        }
+
+
+        Node* original = head;
+        Node* newList = newHead;
+
+
+        while(original != NULL){
+            newList->arb = mapping[original->arb];
+            original = original->next;
+            newList = newList->next;
+        }
+
+        return newHead;
+    }
+
+};
