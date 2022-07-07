@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+int findDuplicate(vector<int> &arr, int n){
+	// Write your code here.
+
+    map<int, bool> map;
+
+    for(int i=0; i<n; i++){
+        if(map[arr[i]] == true){
+            return arr[i];
+        }
+        map[arr[i]] = true;
+    }
+
+    return -1;
+}
